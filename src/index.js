@@ -4,17 +4,21 @@ const plus = document.querySelector('#plus');
 const minus = document.querySelector('#minus');
 const number = document.querySelector('span');
 
+number.innerText = 0;
+
+const PLUS = 'plus';
+const MINUS = 'minus';
+
 const countModifier = (count = 0, action) => {
-  if (action.type === 'plus') {
-    return count + 1;
-  } else if (action.type === 'minus') {
-    return count - 1;
-  } else {
-    return count;
+  switch (action.type) {
+    case PLUS:
+      return count + 1;
+    case MINUS:
+      return count - 1;
+    default:
+      return count;
   }
 };
-
-number.innerText = 0;
 
 const countStore = createStore(countModifier);
 const onChange = () => {
@@ -24,8 +28,8 @@ const onChange = () => {
 countStore.subscribe(onChange);
 
 plus.addEventListener('click', () => {
-  countStore.dispatch({ type: 'plus' });
+  countStore.dispatch({ type: PLUS });
 });
 minus.addEventListener('click', () => {
-  countStore.dispatch({ type: 'minus' });
+  countStore.dispatch({ type: MINUS });
 });
