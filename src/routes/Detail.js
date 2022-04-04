@@ -1,9 +1,17 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 const Detail = () => {
+  const id = useParams().id;
+  const toDos = useSelector((state) => state);
+  const title = toDos.find((toDo) => toDo.id === parseInt(id));
+  // console.log(title);
   return (
-    <div>
-      <h1>소개</h1>
-      <p>리액트 라우터를 사용해 보는 프로젝트입니다.</p>
-    </div>
+    <>
+      <h1>{title?.text.text}</h1>
+      <h5>Created at: {id}</h5>
+    </>
   );
 };
 
